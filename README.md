@@ -1,4 +1,4 @@
-#TEACHSPHERE
+#GEEKSPHERE
 
 Es un proyecto tipo blog de tecnologia y juegos, ademas de interfaz de usuarios basica con registro e cambio de password
 
