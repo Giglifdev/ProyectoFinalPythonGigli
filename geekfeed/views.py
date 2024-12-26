@@ -12,7 +12,7 @@ from .forms import MessageForm
 
 
 
-
+#index
 def home(request):
     technology_posts = Technology.objects.all().order_by('-created_at')
     game_posts = Gamer.objects.all().order_by('-created_at')
@@ -26,10 +26,11 @@ def home(request):
     
     return render(request, 'geekfeed/home.html', context)
 
+#base con la que use navbar y algunas cosas mas
 def base(request):
     return render(request,"geekfeed/base.html")
 
-
+#vista tecnologia y detalle
 def technology(request):
     
     technologies = Technology.objects.all()
@@ -42,7 +43,7 @@ def technology_detail(request, tech_id):
     return render(request, 'geekfeed/technology_detail.html', {'tech_post': tech_post})
 
 
-
+#vista juego y detalle
 def games(request):
     gamer = Gamer.objects.all()
     return render(request,'geekfeed/games.html', {'gamer': gamer})
@@ -53,15 +54,10 @@ def games_detail(request,game_id):
     return render(request,'geekfeed/games_detail.html',{'games_post': games_post})
 
 
-def contact(request):
-    return render(request,"geekfeed/contact.html")
 
 
 
-
-
-
-
+#vista y logica de registro
 def signup(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -86,6 +82,7 @@ def signup(request):
     return render(request, 'geekfeed/signup.html')
 
 
+#vista y logica acceso
 def login_view(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -99,7 +96,7 @@ def login_view(request):
             messages.error(request, 'Credenciales Incorrectas')
     return render(request, 'geekfeed/login.html')
     
-
+#vista cambiar password
 @login_required
 def change_password(request):
     if request.method == 'POST':
@@ -130,7 +127,7 @@ def change_password(request):
     return render(request, "geekfeed/change_password.html")
 
 
-
+#vista dashboard o feed del usuario
 @login_required
 def dashboard(request):
    
@@ -174,7 +171,7 @@ def dashboard(request):
     
     return render(request, 'geekfeed/dashboard.html', {'form': form, 'posts': posts})
 
-
+#editar posteos
 @login_required
 def edit_post(request, post_id):
     
@@ -193,7 +190,7 @@ def edit_post(request, post_id):
 
 
 
-
+#mensajeria
 @login_required
 def inbox(request):
     if request.method == 'POST' and 'delete' in request.POST:
@@ -244,7 +241,7 @@ def responder_mensaje(request, recipient_id):
     return render(request, "responder_mensaje.html", {"recipient": recipient})
 
 
-
+#contacto 
 def contact(request):
     if request.method == 'POST':
         email = request.POST.get('email')

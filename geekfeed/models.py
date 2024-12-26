@@ -4,7 +4,7 @@ from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 
 
-
+#post tecnologia por django
 class Technology(models.Model):
     title = models.CharField(max_length=200)
     content = RichTextField(blank=True, null=True)  
@@ -22,7 +22,7 @@ def technology_detail(request, tech_id):
     return render(request, 'geekfeed/technology_detail.html', {'tech_post': tech_post})
 
 
-
+#post  sobre juegos por django
 class Gamer(models.Model):
     title = models.CharField(max_length=200)
     content = RichTextField(blank=True, null=True)
@@ -38,6 +38,8 @@ def games_detail(request,game_id):
     games_post = get_object_or_404(Gamer, pk=game_id)
     return render(request, 'geekfeed/games_detaail.html', {'games_post':games_post})
 
+#posteo user
+
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=200)
@@ -52,7 +54,7 @@ class Blog(models.Model):
     
 
 
-
+# mensaje user to user
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')

@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'geekfeed',
-    'ckeditor',
+    'ckeditor', #editor para textos
     
 ]
 
