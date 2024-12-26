@@ -1,0 +1,36 @@
+.games-detail-container {
+    width: 35%; 
+    margin: 0 auto; 
+    padding: 20px;
+    background-color: #fff;
+}
+
+
+.games-detail-image {
+    width: 100%; 
+    height: auto; 
+    margin-bottom: 20px; 
+    border-radius: 10px; 
+    border: 1px solid 
+}
+
+
+.games-detail-content {
+    font-family: 'Lora', serif; 
+    font-size: 18px; 
+    line-height: 1.6; 
+    color: #333; 
+    margin-bottom: 20px; 
+    
+}
+
+
+.games-detail-container a {
+    text-decoration: none;
+    color: #1a73e8; 
+    font-weight: bold;
+}
+
+.games-detail-container a:hover {
+    color: #555; 
+}

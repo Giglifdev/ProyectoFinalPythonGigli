@@ -1,0 +1,77 @@
+{% extends 'geekfeed/base.html' %}
+{% load static %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'geekfeed/css/home.css' %}">
+    <link rel="icon" href="/media/favicon/geeksphere.png" type="image/png">
+    
+    
+{% endblock %}
+
+{% block content %}
+
+    
+    <h1>Feed de Publicaciones</h1>
+
+    <div class="feed-container">
+    
+        <h2>Tecnología</h2>
+        <div class="post-section">
+            {% for post in technology_posts %}
+                <div class="post">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+                    {% endif %}
+                    <h3><a href="{% url 'technology_detail' post.id %}">{{ post.title }}</a></h3>
+                    <p>{{ post.body|truncatewords:30 }}</p>
+                    <small>Publicado por {{ post.author }} el {{ post.created_at }}</small>
+                </div>
+            {% empty %}
+                <p>No hay publicaciones en Tecnología.</p>
+            {% endfor %}
+        </div>
+    
+        <h2>Juegos</h2>
+        <div class="post-section">
+            {% for post in game_posts %}
+                <div class="post">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+                    {% endif %}
+                    <h3><a href="{% url 'games_detail' post.id %}">{{ post.title }}</a></h3>
+                    <p>{{ post.body|truncatewords:30 }}</p>
+                    <small>Publicado por {{ post.author }} el {{ post.created_at }}</small>
+                </div>
+            {% empty %}
+                <p>No hay publicaciones en Juegos.</p>
+            {% endfor %}
+        </div>
+    
+        <h2>Mis Publicaciones</h2>
+        <div class="post-section">
+            {% for post in user_posts %}
+                <div class="post">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+                    {% endif %}
+                    <h3>
+                        <a href="{% url 'dashboard' %}">{{ post.title }}</a>  <!-- Redirige al dashboard -->
+                    </h3>  
+                    <p>{{ post.body|truncatewords:30 }}</p>
+                    <small>Publicado por {{ post.author }} el {{ post.created_at }}</small>
+                </div>
+            {% empty %}
+                <p>No has publicado nada aún.</p>
+            {% endfor %}
+        </div>
+        <div class="intro-banner">
+            <h2>Este blog fue creado como un proyecto para aprender y practicar Django, framework web de Python. El objetivo fue construir una plataforma en la que los usuarios puedan crear y gestionar blogs, interactuar con otros usuarios a través de un sistema de mensajería y personalizar sus perfiles, ademas poder ver noticias ya publicadas sobre tecnologia y juegos. La aplicación cuenta con funcionalidades como el registro de usuarios, inicio de sesión, administración de blogs y páginas estáticas, y un sistema de mensajería.</h2>
+        </div>  
+        <div>
+            <footer>
+                <p>&copy; 2024 Geeksphere. Todos los derechos reservados.</p>
+            </footer>
+        </div>
+
+{% endblock %}
+

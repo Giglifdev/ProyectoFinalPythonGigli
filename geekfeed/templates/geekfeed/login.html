@@ -1,0 +1,46 @@
+{% extends 'geekfeed/base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'geekfeed/css/login.css' %}">
+  <link rel="icon" href="/media/favicon/geeksphere.png" type="image/png">
+</head>
+
+<body>
+
+<div class="login-box">
+  <h2>Login</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="user-box">
+     <input type="username" name="username" required>
+      <label for="username">Usuario</label>
+    </div>
+    <div class="user-box">
+      <input type="password" name="password" required>
+      <label for="password">Contraseña</label>
+    </div>
+    <button type="submit">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      Login
+    </button>
+  </form>
+  <p>Don't have an account? <a href="{% url 'signup' %}" class="a2">Sign up!</a></p>
+</div>
+{% if messages %}
+{% for message in messages %}
+  <div class="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+</body>
+<div>
+  <footer>
+      <p>&copy; 2024 Geeksphere. Todos los derechos reservados.</p>
+  </footer>
+</div>

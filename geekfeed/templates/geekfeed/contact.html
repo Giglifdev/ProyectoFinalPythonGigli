@@ -1,0 +1,40 @@
+{% extends 'geekfeed/base.html' %}
+{% load static %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'geekfeed/css/contact.css' %}">
+    <link rel="icon" href="/media/favicon/geeksphere.png" type="image/png">
+    
+    
+{% endblock %}
+
+{% block content %}
+<form class="contact-form" method="POST" action="{% url 'contact' %}">
+    {% csrf_token %}
+    <div class="title">Contáctanos</div>
+    <div class="user-box">
+        <input type="email" name="email" class="input" required>
+        <label for="email">Correo Electrónico</label>
+    </div>
+    <div class="user-box">
+        <textarea name="message" required></textarea>
+        <label for="message">Mensaje</label>
+    </div>
+    <button type="submit" class="submit-button">
+        Enviar
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>  
+        {% endfor %}
+    {% endif %}
+
+</form>
+
+
+{% endblock %}
+

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeekSphere</title>
+    
+   
+    <link rel="stylesheet" href="{% static 'geekfeed/css/navbar.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora&display=swap');
+        
+    </style>
+    
+    
+    {% block extra_styles %}
+    {% endblock %}
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul class="nav-bar">
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'technology' %}">Technology</a>
+                </li>
+                <li>
+                    <a href="{% url 'games' %}">Games</a>
+                </li>
+                <li>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'dashboard' %}">Mi cuenta</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <a href="javascript:void(0);" onclick="this.closest('form').submit();">Log Out</a>
+                    </form>
+                </li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+
+  <h1>Perfil de {{ user.username }}</h1>
+
+  <div>
+    <h2>Información personal</h2>
+    <p><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    
+  </div>
+
+  <div>
+    <h2>Mis publicaciones</h2>
+    {% if posts %}
+      <ul>
+        {% for post in posts %}
+          <li>
+            <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No tienes publicaciones aún.</p>
+    {% endif %}
+  </div>
+
+  <a href="{% url 'edit_profile' %}">Editar mi perfil</a>
+{% endblock %}
+Paso 3: Acceder al perfil desde el dashboard
+En el dashboard.html, puedes añadir un enlace para que el usuario pueda acceder a su perfil. Esto es simplemente un enlace a la vista de profile.
+
+html
+Copy code
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Bienvenido, {{ user.username }}!</h1>
+
+  <p><a href="{% url 'profile' %}">Ver mi perfil</a></p>
+
+  <h2>Mis publicaciones recientes</h2>
+  {% if posts %}
+    <ul>
+      {% for post in posts %}
+        <li>
+          <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tienes publicaciones aún.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeekSphere</title>
+    <link rel="stylesheet" href="{% static 'geekfeed/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'geekfeed/css/dashboard.css' %}">
+    <link rel="icon" href="/media/favicon/geeksphere.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora&display=swap');
+    </style>
+    {% block extra_styles %}
+    {% endblock %}
+</head>
+<body>
+    
+    <nav>
+        <div class="container">
+            <ul class="nav-bar">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'technology' %}">Technology</a></li>
+                <li><a href="{% url 'games' %}">Games</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li> 
+                <li><a href="{% url 'dashboard' %}">Mi cuenta</a></li>
+                <li><a href="{% url 'change_password' %}">Cambiar Password</a></li>
+                <li><a href="{% url 'inbox' %}">Mensajes</a></li>  
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <a href="javascript:void(0);" onclick="this.closest('form').submit();">Log Out</a>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+        <div class="dashboard">
+            <h2>Bienvenido, {{ user.username }}!</h2> 
+            <p>Desde Aquí puedes ver tus actividades recientes</p>
+    
+            <h3>Crea un nuevo post</h3>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="submit-btn" name="create">Publicar</button>
+            </form>
+    
+            <h3>Mis posts</h3>
+            <ul>
+                {% for post in posts %}
+                <li>
+                    <h4>{{ post.title }}</h4>
+                    <h5>{{ post.subtitle }}</h5>  
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                    {% endif %}
+                    <p>{{ post.body }}</p>
+                    
+                    <a href="{% url 'edit_post' post.id %}" class="edit-btn">Editar</a>
+
+                    <form method="POST" action="{% url 'dashboard' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="{{ post.id }}">
+                        <button type="submit" name="delete" class="delete-btn" onclick="return confirm('¿Estás seguro de que quieres eliminar este post?');">Eliminar</button>
+                    </form>        
+                </li>
+                {% empty %}
+                    <p>No has publicado nada aún.</p>
+                {% endfor %}
+            </ul>
+
+            
+            <p><a href="{% url 'inbox' %}">Ir a la bandeja de entrada de mensajes</a></p>
+        </div>
+        {% endblock %}
+    </div>
+
+</body>
+</html>

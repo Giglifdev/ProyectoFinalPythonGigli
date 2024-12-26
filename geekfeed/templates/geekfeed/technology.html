@@ -1,0 +1,38 @@
+{% extends 'geekfeed/base.html' %}
+{% load static %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'geekfeed/css/techstyles.css' %}">
+    <link rel="icon" href="/media/favicon/geeksphere.png" type="image/png">
+    
+{% endblock %}
+
+{% block content %}
+<h2>Noticias de Tecnología</h2>
+
+<div class="technology-news-container">
+    {% if technologies %}
+        {% for tech in technologies %}
+            <div class="tech-news-item">
+                <h3 class="elh3">{{ tech.title }}</h3>
+                <div class="parrafo">
+                <p>{{ tech.content|safe }}</p>
+                </div>                
+                {% if tech.image %}
+                    <img src="{{ tech.image.url }}" alt="{{ tech.title }}" class="tech-image">
+                {% endif %}
+                
+                <a href="{% url 'technology_detail' tech.id %}">Leer más</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No hay publicaciones de tecnología disponibles.</p>
+    {% endif %}
+</div>
+<div>
+    <footer>
+        <p>&copy; 2024 Geeksphere. Todos los derechos reservados.</p>
+    </footer>
+</div>
+
+{% endblock %}

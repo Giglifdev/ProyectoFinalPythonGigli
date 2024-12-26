@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responder Mensaje - GeekSphere</title>
+    <link rel="stylesheet" href="{% static 'geekfeed/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'geekfeed/css/dashboard.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul class="nav-bar">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'technology' %}">Technology</a></li>
+                <li><a href="{% url 'games' %}">Games</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'dashboard' %}">Mi cuenta</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <a href="javascript:void(0);" onclick="this.closest('form').submit();">Log Out</a>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="dashboard">
+            <h2>Responder Mensaje</h2>
+            <p><strong>Responder a:</strong> {{ recipient.username }}</p>
+
+            <form action="{% url 'send_reply' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="recipient_id" value="{{ recipient.id }}">
+                <textarea name="content" rows="5" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                <a href="{% url 'inbox' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</body>
+<div>
+    <footer>
+        <p>&copy; 2024 Geeksphere. Todos los derechos reservados.</p>
+    </footer>
+</div>
+</html>

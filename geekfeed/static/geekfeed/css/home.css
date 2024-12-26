@@ -1,0 +1,60 @@
+/* home.css */
+
+.intro-banner {
+    background-color: #2E3B4E;  
+    color: #fff;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.intro-banner h2 {
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-family: 'Arial', sans-serif;
+}
+
+.intro-banner {
+    background: linear-gradient(135deg, #2E3B4E, #4F5B6F);
+}
+
+.feed-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.post-section {
+    margin-bottom: 40px;
+}
+
+.post {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.post h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.post p {
+    font-size: 1rem;
+    color: #333;
+}
+
+.post small {
+    display: block;
+    color: #777;
+}

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Mensaje - GeekSphere</title>
+    <link rel="stylesheet" href="{% static 'geekfeed/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'geekfeed/css/dashboard.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul class="nav-bar">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'technology' %}">Technology</a></li>
+                <li><a href="{% url 'games' %}">Games</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'dashboard' %}">Mi cuenta</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <a href="javascript:void(0);" onclick="this.closest('form').submit();">Log Out</a>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="dashboard">
+            <h2>Enviar un Nuevo Mensaje</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="submit-btn">Enviar Mensaje</button>
+            </form>
+        </div>
+    </div>
+</body>
+<div>
+    <footer>
+        <p>&copy; 2024 Geeksphere. Todos los derechos reservados.</p>
+    </footer>
+</div>
+</html>

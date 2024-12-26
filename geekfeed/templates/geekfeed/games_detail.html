@@ -1,0 +1,31 @@
+{% extends 'geekfeed/base.html' %}
+{% load static %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'geekfeed/css/games_detail.css' %}">
+    <link rel="icon" href="/media/favicon/geeksphere.png" type="image/png">
+{% endblock %}
+
+{% block content %}
+<body>
+    <div class="games-detail-container">
+        <h1>{{ games_post.title }}</h1>
+
+        {% if games_post.image %}
+            <img src="{{ games_post.image.url }}" alt="{{ games_post.title }}" class="games-detail-image">
+        {% endif %}
+
+        <div class="games-detail-content">
+            {{ games_post.full_content|safe }}  
+        </div>
+
+        <p><small>Publicado el {{ games_post.created_at }}</small></p>
+
+        <a href="{% url 'games' %}">Volver a las publicaciones</a>
+    </div>
+</body>
+<div>
+    <footer>
+        <p>&copy; 2024 Geeksphere. Todos los derechos reservados.</p>
+    </footer>
+</div>
+{% endblock %}

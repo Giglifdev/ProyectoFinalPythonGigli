@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajes - GeekSphere</title>
+    <link rel="stylesheet" href="{% static 'geekfeed/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'geekfeed/css/dashboard.css' %}">
+    <link rel="icon" href="/media/favicon/geeksphere.png" type="image/png">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul class="nav-bar">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'technology' %}">Technology</a></li>
+                <li><a href="{% url 'games' %}">Games</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'dashboard' %}">Mi cuenta</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <a href="javascript:void(0);" onclick="this.closest('form').submit();">Log Out</a>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="dashboard">
+            <h2>Mensajes Recibidos</h2>
+
+            <a href="{% url 'send_message' %}" class="btn btn-primary">Nuevo Mensaje</a>
+            <ul>
+                {% for message in messages %}
+                <li id="message-{{ message.id }}">
+                    <p><strong>De:</strong> {{ message.sender.username }} <strong>Fecha:</strong> {{ message.created_at }}</p>
+                    <p>{{ message.content }}</p>
+                    {% if not message.is_read %}
+                        <p><strong>No leído</strong></p>
+                        <a href="{% url 'mark_as_read' message.id %}">Marcar como leído</a>
+                    {% else %}
+                        <p><strong>Leído</strong></p>
+                    {% endif %}
+                    <!-- Formulario para eliminar el mensaje -->
+                    <form method="POST" action="{% url 'inbox' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="message_id" value="{{ message.id }}">
+                        <button type="submit" name="delete" class="delete-btn" onclick="return confirm('¿Estás seguro de que quieres eliminar este mensaje?');">Borrar Mensaje</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+<div>
+    <footer>
+        <p>&copy; 2024 Geeksphere. Todos los derechos reservados.</p>
+    </footer>
+</div>
+</html>
