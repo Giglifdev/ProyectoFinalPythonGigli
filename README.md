@@ -23,4 +23,4 @@ Inicia el servidor
 
 ## Video de demostración
 Puedes ver una demostración de cómo interactuar con el proyecto a continuación:
-![Demostracion Proyecto](video/video.mp4)
+![Demostracion Proyecto](https://drive.google.com/file/d/1oFtHR88o7wCWCf3EjbOotXTDuE35T2xF/view?usp=drive_link)
