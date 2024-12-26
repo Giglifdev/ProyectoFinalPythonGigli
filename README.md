@@ -19,3 +19,8 @@ Instala las dependencias
 pip install -r requirements.txt
 
 Inicia el servidor
+
+
+## Video de demostración
+Puedes ver una demostración de cómo interactuar con el proyecto a continuación:
+![Demostracion Proyecto](video/video.mp4)
